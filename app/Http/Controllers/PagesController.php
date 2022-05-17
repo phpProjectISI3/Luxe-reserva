@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use DB;
 use App\Logement;
-use App\TypeLogement;
+// use App\TypeLogement;
 use App\Detail_logement;
 use App\Message_contact;
+use App\Models\TypeLogement;
 use App\Sauvegarde_logement;
+use Illuminate\Support\Facades\DB as DB;
 
 class PagesController extends Controller
 {
@@ -71,7 +72,7 @@ class PagesController extends Controller
         $capacitePersonne = $request->input('capacitepersonne');
         //prend la valeur de la ville selectionné
         $ville = $request->input('ville');
-        //si la session est  définie on l'affecte 
+        //si la session est  définie on l'affecte
         if (Session()->has('datedebut')) {
             if ($request->input('date-start') != null) {
                 // creer une varibale de session contien la date_debut saisi par le client
@@ -116,7 +117,7 @@ class PagesController extends Controller
             //select tous les types
             $types = TypeLogement::All();
             //select toutes les capacites des personnes
-            $CapacitePersonne = DB::table('detail_logement')->select(DB::raw('detail_logement.capacite_personne_max'))->groupBy('detail_logement.capacite_personne_max')->get();
+            $CapacitePersonne = DB::table('detail_logements')->select(DB::raw('detail_logement.capacite_personne_max'))->groupBy('detail_logement.capacite_personne_max')->get();
             //select les logement
             $logements = DB::select('select logement.id_logement, logement.adress_logement, logement.nom_logement, detail_logement.tarif_par_nuit_hs, detail_logement.description_logement from logement join  detail_logement on logement.detail_logement_= detail_logement.id_detail ');
 
