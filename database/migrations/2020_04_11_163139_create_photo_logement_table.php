@@ -20,7 +20,7 @@ class CreatePhotoLogementTable extends Migration
             $table->unsignedBigInteger('logement_id');
             $table->foreign('logement_id')
                 ->references('id_logement')
-                ->on('logement');
+                ->on('logements');
             $table->timestamps();
         });
     }

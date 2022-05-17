@@ -17,10 +17,7 @@ class CreateReservationLogementTable extends Migration
             $table->id('id_reservation');
 
             $table->unsignedBigInteger('demande_id');
-            $table->foreign('demande_id')
-                ->references('id_demande')
-                ->on('demande_reservations');
-
+            $table->foreign('demande_id')->references('id_demande')->on('demande_reservations');
 
             $table->timestamps();
         });
